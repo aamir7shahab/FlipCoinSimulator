@@ -1,13 +1,12 @@
-#uc1 Simulator start with Flipping a Cointo Display Heads or Tails as winner
+#!/bin/bash
 
 declare -A coin
 	echo "${coin[@]}"
-
-#uc2 Loop through Multiple times of flipping a coin and show number of times head and tail has won
-read -p "Enter 0 for Heads and 1 for Tails:" choice
+echo "Player1 (Heads) and Player2 (Tails)."
+read -p "Enter your call 0(Heads) and 1 (Tails):" choice
 
 i=0
-while [[ $i -lt 50 ]]; do
+while [[ $((coin['Heads'])) -le 21 || $((coin['Tails'])) -le 21 ]]; do
 	toss=$((RANDOM%2))
 	if [[ $toss -eq 0 ]]; then
 		coin['Heads']=$((coin['Heads'] + 1))
@@ -23,7 +22,7 @@ echo "Values: ${coin[@]}"
 if [[ $((coin['Heads'])) -eq $((coin['Tails'])) ]]; then
 	echo "It is a draw."
 elif [[ $((coin['Heads'])) -gt $((coin['Tails'])) && $choice -eq 0 ]]; then
-	echo "You Won."
+	echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) toss."
 else
-	echo "You Lost."
+	echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) toss."
 fi
