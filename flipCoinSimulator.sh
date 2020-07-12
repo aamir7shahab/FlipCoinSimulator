@@ -6,7 +6,7 @@ echo "Player1 (Heads) and Player2 (Tails)."
 read -p "Enter your call 0(Heads) and 1 (Tails):" choice
 
 i=0
-while [[ $((coin['Heads'])) -lt 21 && $((coin['Tails'])) -lt 21 ]]; do
+while [[ $((coin['Heads'])) -lt 21 || $((coin['Tails'])) -lt 21 ]]; do
 	toss=$((RANDOM%2))
 	if [[ $toss -eq 0 ]]; then
 		coin['Heads']=$((coin['Heads'] + 1))
@@ -33,12 +33,22 @@ if [[ $((coin['Heads'])) -eq $((coin['Tails'])) ]]; then
 		((i++))
 	done
 	if [[ $((coin['Heads'])) -gt $((coin['Tails'])) && $choice -eq 0 ]]; then
-		echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) toss."
+		echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) tosses."
+	elif [[ $((coin['Heads'])) -gt $((coin['Tails'])) && $choice -eq 0 ]]; then
+		echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) tosses."
+	elif [[ $((coin['Heads'])) -gt $((coin['Tails'])) && $choice -eq 1 ]]; then
+		echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) tosses."
+	elif [[ $((coin['Tails'])) -gt $((coin['Heads'])) && $choice -eq 0 ]]; then
+		echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) tosses."
 	else
-		echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) toss."
+		echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) tosses."
 	fi
 elif [[ $((coin['Heads'])) -gt $((coin['Tails'])) && $choice -eq 0 ]]; then
-	echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) toss."
+	echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) tosses."
+elif [[ $((coin['Heads'])) -gt $((coin['Tails'])) && $choice -eq 1 ]]; then
+	echo "Player1 won by $(($((coin['Heads']))-$((coin['Tails'])))) tosses."
+elif [[ $((coin['Tails'])) -gt $((coin['Heads'])) && $choice -eq 0 ]]; then
+	echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) tosses."
 else
-	echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) toss."
+	echo "Player2 won by $(($((coin['Tails']))-$((coin['Heads'])))) tosses."
 fi
